@@ -8,7 +8,8 @@ A debt of gratitued is owed to @pschatzmann for
 Implementation Notes
 --------------------
 
-The Olimex RP2350pc board has a GPIO pin connected to the ES8311 power enable
+The [Olimex RP2350pc](https://www.olimex.com/Products/RaspberryPi/PICO/RP2350pc/)
+board has a GPIO pin connected to the ES8311 power enable
 pin (GPIO22). This pin must be enabled for output and a True (1) value placed on 
 the pin for the DAC to be powered. In addition, the speaker connectors are run
 through an on-board amplifier for which there is a Volume pin (GPIO34) and an
