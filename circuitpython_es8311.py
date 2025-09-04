@@ -306,8 +306,18 @@ class ES8311:
 
         """Initialize ES8311 for DAC playback."""
 
-        if coeff_div.get(sample_rate,None) == None:
-            raise ValueError("Unsupported sample rate")
+        _sample_rate = sample_rate
+        if coeff_div.get(_sample_rate,None) == None:
+            # Search for supported sample rate close to requested
+            smldiff = -1
+            for rate in coeff_div:
+                if smldiff == -1 or smldiff > abs(rate - sample_rate):
+                        
+                    smldiff = abs(rate - sample_rate)
+                    _sample_rate = rate
+                    
+            if abs(_sample_rate - sample_rate) > 15000:
+                raise ValueError("Unsupported sample rate")
 
         self._write_register(_ES8311_CLK_MANAGER_REG01, 0x30)
         self._write_register(_ES8311_CLK_MANAGER_REG02, 0x00)
@@ -336,11 +346,11 @@ class ES8311:
         regv |= 0x80
         self._write_register(_ES8311_CLK_MANAGER_REG01, regv)
 
-        mclk_fre = sample_rate * 256
-        if coeff_div.get(sample_rate,{}).get(mclk_fre) == None:
-            raise ValueError(f"Unable to configure samle rate {sample_rate}Hz with {mclk_fre}Hz MCLK")
+        mclk_fre = _sample_rate * 256
+        if coeff_div.get(_sample_rate,{}).get(mclk_fre) == None:
+            raise ValueError(f"Unable to configure samle rate {_sample_rate}Hz with {mclk_fre}Hz MCLK")
         else:
-            div_record = coeff_div[sample_rate][mclk_fre]
+            div_record = coeff_div[_sample_rate][mclk_fre]
 
         # Set clock parameters (44.1Khz)
         # {11289600: [0x01, 0x00, 0x01,   0x01,   0x00,   0x00, 0xff, 0x04, 0x10, 0x10},
