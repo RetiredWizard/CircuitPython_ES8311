@@ -1,6 +1,10 @@
 # CircuitPython_ES8311
 CircuitPython driver for ES8311 I2S audio codec
 
+A debt of gratitued is owed to @pschatzmann for 
+@pschatzmann for [arduino-audio-driver](https://github.com/pschatzmann/arduino-audio-driver) and [arduino-audio-tools](https://github.com/pschatzmann/arduino-audio-tools)
+
+
 Implementation Notes
 --------------------
 
