@@ -54,3 +54,22 @@ Olimex RP2340pc Mini-Speaker
     audio_bus = audiobusio.I2SOut(board.I2S_BCLK, board.I2S_WS, board.I2S_DIN)
     audio_bus.play(wav)
     print(audio_bus.playing)
+
+Notes Regarding the Circuit Python firmware
+-------------------------------------------
+(Olimex_RP2350pc_Beta_CP10.x.zip)
+
+The RP2350pc has a 4 port USB hub connected in parallel to the USB device port which prevents the HUB from being used
+at the same time as the USB device (CIRCUITPY drive) in CircuitPython. This makes it a little more difficult to
+transfer files/programs to the internal flash of the device, however a standard FTDI to serial (or similar) cable
+can be connected to UEXT1 pins 2(GND), 3(GPIO0-TX) and 4(GPIO1-RX) over which Circuit Python will provide a serial REPL interface.
+Once this serial connection has been made to a host computer, Thonny or other microcontroller IDEs can be used to transfer files and run
+programs. In addition, CircuitPython will auto-mount any insrted SD card which can be used to transfer files as well. 
+
+Another possible option would be to flash the RP2350pc with [Adafruit Feather RP2350](https://circuitpython.org/board/adafruit_feather_rp2350/)
+firmware from circuitpython.org. Using the Feather
+firmware the RP2350 peripherals will not work, however it will mount a CIRCUITPY drive. You can then copy the files you want
+on the internal flash and re-flash with the RP2350pc firmware at which point you should be able to interact with the 
+REPL over the HDMI display and a keyboard plugged in to a USB hub port. If one of the files you placed on the internal
+flash in this manner was [PyDOS](https://github.com/RetiredWizard/PyDOS) (only the PyDOS.py file itself is required) then it
+will be trivial to move future files back and forth between inserted SD cards.
