@@ -5,6 +5,10 @@ API loosely modeled after Adafruit's TLV320AIC23 driver for compatibility.
 
 * Author(s): RetiredWizard
 
+Resource Credit:
+@pschatzmann for arduino-audio-driver (https://github.com/pschatzmann/arduino-audio-driver) and
+arduino-audio-tools (https://github.com/pschatzmann/arduino-audio-tools)
+
 Implementation Notes
 --------------------
 
