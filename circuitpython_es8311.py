@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 """
 CircuitPython driver for ES8311 I2S audio codec.
-API modeled after Adafruit's TLV320AIC23 driver for compatibility.
+API loosely modeled after Adafruit's TLV320AIC23 driver for compatibility.
 
 * Author(s): RetiredWizard
 
