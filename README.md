@@ -5,6 +5,16 @@ A debt of gratitued is owed to @pschatzmann for
 [arduino-audio-driver](https://github.com/pschatzmann/arduino-audio-driver) and [arduino-audio-tools](https://github.com/pschatzmann/arduino-audio-tools)
 
 
+circuitpython_es8311.py - minimal i2s audio driver for es8311 codec
+
+    * line in/mic input not supported
+    * Currently no way to run es8311 in "Master" mode
+    * MCLK must be derived from SCLK
+    * Currently no way to utilize inverted clock signals (MCLK/SCLK)
+
+adafruit_tlv320.py - Shell library to allow applications written to use the TLV320 I2S DAC chip to run on boards using the ES8311 chip without modification (assuming the above limitations of circuitpython_es8311.py don't apply).
+
+
 Implementation Notes
 --------------------
 
