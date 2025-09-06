@@ -450,11 +450,11 @@ class ES8311:
         self._write_register(_ES8311_GP_REG45, 0x00)
 
     @staticmethod
-    def _convert_reg_to_db(reg_val: int) -> float:
+    def _convert_reg_to_db(regval: int) -> float:
         """
         Convert a register value to decibel volume.
 
-        :param reg_val: 8-bit register value
+        :param regval: 8-bit register value
         :return: Volume in dB
         """
 
@@ -468,14 +468,14 @@ class ES8311:
         :param db: Volume in dB (-95.5 to 32 dB)
         :return: 8-bit register value
         """
-        if reg_val > 32:
-            reg_val = 32
-        elif reg_val < -95.5:
-            reg_val = -95.5
+        if db > 32:
+            db = 32
+        elif db < -95.5:
+            db = -95.5
 
-        regval = int(((volume_db + 95.5) / (127.5)) * 255)
+        regval = int(((db + 95.5) / (127.5)) * 255)
 
-        return reg_val & 0xFF
+        return regval & 0xFF
 
     # ---------------------------
     # Volume Control
@@ -488,6 +488,7 @@ class ES8311:
 
         return self._convert_reg_to_db(regval)
 
+    @dac_volume.setter
     def dac_volume(self, volume_db: float) -> None:
         """Set DAC volume from -95.5 dB to -32 dB in 0.5 dB steps."""
 
@@ -504,4 +505,3 @@ class ES8311:
         """Unmute DAC """
         regval = self._read_register(_ES8311_DAC_REG31)
         self._write_register(_ES8311_DAC_REG31, regval | 0xE0)
-
