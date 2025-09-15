@@ -249,6 +249,10 @@ class ES8311:
         """
         self.i2c_device = I2CDevice(i2c, address)
         self._debug = debug
+
+        self.sample_rate = None
+        self._bit_depth = None
+
         self.reset()
         time.sleep(0.01)
 
@@ -307,6 +311,9 @@ class ES8311:
         """Initialize ES8311 for DAC playback."""
 
         _sample_rate = sample_rate
+        self.sample_rate = sample_rate
+        self.bit_depth = bit_depth
+        
         if coeff_div.get(_sample_rate,None) == None:
             # Search for supported sample rate close to requested
             smldiff = -1
